@@ -1,0 +1,22 @@
+app_name: <%= ENV['APP_NAME'] %>, InventoryEventProcessor
+environment: <%= ENV['ENVIRONMENT'] %>, DEV
+
+mongo:
+  host: <%= ENV['MONGO_HOST'] %>, localhost:27017
+  use_ssl: <%= ENV['MONGO_USE_SSL'] %>, false
+  cert_path: <%= ENV['MONGO_CERT_PATH'] %>, /tmp/certs/
+  rootca: <%= ENV['MONGO_ROOTCA'] %>,
+  client_key: <%= ENV['MONGO_CLIENT_KEY'] %>,
+  client_certificate: <%= ENV['MONGO_CLIENT_CERT'] %>,
+  database: <%= ENV['MONGO_DATABASE'] %>, CatalogService
+  product_collection: <%= ENV['PRODUCT_COLLECTION'] %>, inventory_facts
+  cart_collection: <%= ENV['CART_COLLECTION'] %>,
+  orders_collection: <%= ENV['ORDErS_COLLECTION'] %>,
+
+aws:
+  url: <%= ENV['AWS_URL'] %>,
+  client_id: <%= ENV['AWS_CLIENT_ID'] %>, 12345678
+  region_id: <%= ENV['AWS_REGION_ID'] %>, us-east-1
+  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>,
+  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>,
+  inventory_queue: <%= ENV['INVENTORY_QUEUE'] %>,
