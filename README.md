@@ -1,4 +1,4 @@
-# EYAC (Promunced like `Yak`)
+# EYAC (Promunced like 'Yak')
 #### Environment Yaml Augmented Configuration
 
                             _,,,_
