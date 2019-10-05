@@ -33,7 +33,14 @@ func LoadConfig(filename string, settings interface{}) {
 		panic(err)
 	}
 }
+/*
 
+ENV
+ENV_BOOL
+ENV_INT
+ENV_LIST
+
+ */
 func getEnvOrDefault(line string) string {
 	parts := strings.Split(line, ":")
 	if len(parts) < 2 || parts[1] == "" {
@@ -41,8 +48,35 @@ func getEnvOrDefault(line string) string {
 	}
 	values := strings.Split(strings.TrimSpace(parts[1]), ",")
 	value := strings.TrimSpace(values[0])
+
+	index := 0
 	if strings.HasPrefix(value, "<%= ENV['") && strings.HasSuffix(value, "'] %>") {
 		env := strings.TrimSuffix(strings.TrimPrefix(value, "<%= ENV['"), "'] %>")
+		index = strings.Index(line, "<%= ENV['")
+		value = os.Getenv(env)
+		if value == "" {
+			value = strings.TrimSpace(values[1])
+		}
+	} else if strings.HasPrefix(value, "<%= ENV_INT['") && strings.HasSuffix(value, "'] %>") {
+		env := strings.TrimSuffix(strings.TrimPrefix(value, "<%= ENV_INT['"), "'] %>")
+		index = strings.Index(line, "<%= ENV_INT['")
+		fmt.Println(env)
+		value = os.Getenv(env)
+		if value == "" {
+			value = strings.TrimSpace(values[1])
+		}
+	} else if strings.HasPrefix(value, "<%= ENV_BOOL['") && strings.HasSuffix(value, "'] %>") {
+		env := strings.TrimSuffix(strings.TrimPrefix(value, "<%= ENV_BOOL['"), "'] %>")
+		index = strings.Index(line, "<%= ENV_BOOL['")
+		fmt.Println(env)
+		value = os.Getenv(env)
+		if value == "" {
+			value = strings.TrimSpace(values[1])
+		}
+	} else if strings.HasPrefix(value, "<%= ENV_LIST['") && strings.HasSuffix(value, "'] %>") {
+		env := strings.TrimSuffix(strings.TrimPrefix(value, "<%= ENV_LIST['"), "'] %>")
+		index = strings.Index(line, "<%= ENV_LIST['")
+		fmt.Println(env)
 		value = os.Getenv(env)
 		if value == "" {
 			value = strings.TrimSpace(values[1])
@@ -50,7 +84,6 @@ func getEnvOrDefault(line string) string {
 	} else {
 		value = strings.TrimSpace(values[1])
 	}
-	index := strings.Index(line, "<%= ENV['")
 
 	newline := strings.Replace(line,
 		line[index:], value, 1)

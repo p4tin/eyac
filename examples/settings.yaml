@@ -3,7 +3,7 @@ environment: <%= ENV['ENVIRONMENT'] %>, DEV
 
 mongo:
   host: <%= ENV['MONGO_HOST'] %>, localhost:27017
-  use_ssl: <%= ENV['MONGO_USE_SSL'] %>, false
+  use_ssl: <%= ENV_BOOL['MONGO_USE_SSL'] %>, false
   cert_path: <%= ENV['MONGO_CERT_PATH'] %>, /tmp/certs/
   rootca: <%= ENV['MONGO_ROOTCA'] %>,
   client_key: <%= ENV['MONGO_CLIENT_KEY'] %>,
