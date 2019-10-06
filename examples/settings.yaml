@@ -1,7 +1,7 @@
 app_name: <%= ENV['APP_NAME'] %>, InventoryEventProcessor
 environment: <%= ENV['ENVIRONMENT'] %>, DEV
 
-mongo:
+mongo:  #This is a test
   host: <%= ENV['MONGO_HOST'] %>, localhost:27017
   use_ssl: <%= ENV_BOOL['MONGO_USE_SSL'] %>, false
   cert_path: <%= ENV['MONGO_CERT_PATH'] %>, /tmp/certs/
