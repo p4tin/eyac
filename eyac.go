@@ -42,10 +42,15 @@ ENV_LIST
 
  */
 func getEnvOrDefault(line string) string {
+	i := strings.Index(line, "#")
+	if i > 0 {
+		line = strings.TrimSpace(line[:i])
+	}
 	parts := strings.Split(line, ":")
 	if len(parts) < 2 || parts[1] == "" {
 		return line
 	}
+
 	values := strings.Split(strings.TrimSpace(parts[1]), ",")
 	value := strings.TrimSpace(values[0])
 
